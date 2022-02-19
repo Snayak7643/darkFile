@@ -7,6 +7,7 @@ const AuthRouter = require("./Routes/Auth");
 
 //DB Connection
 mongoose.connect(MONGOURI);
+
 mongoose.connection.on("connected", () => {
   console.log("Connected to DataBase");
 });
