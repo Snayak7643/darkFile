@@ -15,7 +15,6 @@ const RequiredSignIn = async (req, res, next) => {
     const _id = decode._id;
     User.findById(_id).then((user) => {
       req.user = user;
-      console.log(user);
       next();
     });
   });
