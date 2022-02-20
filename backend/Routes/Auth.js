@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../Models/User");
 const Post = require("../Models/Post");
@@ -77,6 +76,16 @@ router.post("/createpost", RequiredSignIn, (req, res) => {
     .catch((error) => {
       res.json(error);
     });
+});
+
+//All posts Route
+router.get("/allposts", RequiredSignIn, (req, res) => {
+  const _id = req.user._id;
+  const func = async () => {
+    const posts = await Post.find({ postedBy: _id });
+    res.json(posts);
+  };
+  func();
 });
 
 module.exports = router;
