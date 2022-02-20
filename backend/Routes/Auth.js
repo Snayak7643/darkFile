@@ -2,9 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../Models/User");
+const Post = require("../Models/Post");
 const bcrypt = require("bcrypt");
 const { JWT_SECRET } = require("../keys");
 const jwt = require("jsonwebtoken");
+const RequiredSignIn = require("../Middlewares/RequiredSignIn");
 
 //Router for SignIn
 router.post("/signin", (req, res) => {
@@ -57,6 +59,24 @@ router.post("/signup", (req, res) => {
       });
   };
   func();
+});
+
+//create post route
+router.post("/createpost", RequiredSignIn, (req, res) => {
+  const { title, pic } = req.body;
+  const postedBy = req.user._id;
+  if (!title || !pic) {
+    return res.json({ message: "All the details are required to post" });
+  }
+  const post = new Post({ title, pic, postedBy });
+  post
+    .save()
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
 });
 
 module.exports = router;
