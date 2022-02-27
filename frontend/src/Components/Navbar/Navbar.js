@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Nav, NavLink, NavIcon, NavMenu } from "./NavbarStyle";
-import { FaBars, FaTimes, FaSnapchatGhost } from "react-icons/fa";
+import { FaBars, FaTimes, FaShopify } from "react-icons/fa";
 import { AppContext } from "../../App";
 
 const Navbar = () => {
@@ -64,7 +64,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavLink to="/" onClick={handleClick}>
-        <FaSnapchatGhost style={{ fontSize: "2rem" }} />
+        <FaShopify style={{ fontSize: "3rem", marginLeft: "10px" }} />
       </NavLink>
       <NavIcon onClick={handleClick}>
         {active ? <FaTimes /> : <FaBars />}
