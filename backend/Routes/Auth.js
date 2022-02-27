@@ -11,7 +11,7 @@ const RequiredSignIn = require("../Middlewares/RequiredSignIn");
 router.post("/signin", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(422).json({ message: "Plaese Fill all the details! " });
+    return res.status(422).json({ error: "Plaese Fill all the details! " });
   }
   const func = async () => {
     try {
@@ -27,7 +27,7 @@ router.post("/signin", (req, res) => {
           });
         }
       }
-      return res.status(422).json({ message: "Invalid UserId or Password ! " });
+      return res.status(422).json({ error: "Invalid UserId or Password ! " });
     } catch (err) {
       console.log(err);
     }
@@ -39,12 +39,12 @@ router.post("/signin", (req, res) => {
 router.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
-    return res.status(422).json({ message: "Please Fill all the details!" });
+    return res.status(422).json({ error: "Please Fill all the details!" });
   }
   const func = async () => {
     const SavedUser = await User.findOne({ email });
     if (SavedUser) {
-      return res.status(422).json({ message: "You are Already Registered!" });
+      return res.status(422).json({ error: "You are Already Registered!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ name, email, password: hashedPassword });
@@ -65,7 +65,7 @@ router.post("/createpost", RequiredSignIn, (req, res) => {
   const { title, pic } = req.body;
   const postedBy = req.user._id;
   if (!title || !pic) {
-    return res.json({ message: "All the details are required to post" });
+    return res.json({ error: "All the details are required to post" });
   }
   const post = new Post({ title, pic, postedBy });
   post
