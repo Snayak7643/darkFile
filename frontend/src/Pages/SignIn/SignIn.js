@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../App";
 import { Link, useHistory } from "react-router-dom";
 import {
   CardWrapper,
@@ -15,6 +16,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const { dispatch } = useContext(AppContext);
 
   const handleClick = async () => {
     try {
@@ -31,6 +33,9 @@ const SignIn = () => {
       const data = await res.json();
       console.log(data);
       if (data.message) {
+        localStorage.setItem("jwt", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        dispatch({ type: "USER", payload: data.user });
         history.push("/");
       }
     } catch (err) {
