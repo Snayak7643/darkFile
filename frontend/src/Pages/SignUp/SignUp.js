@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import swal from "sweetalert";
 import {
   CardWrapper,
   CardHeader,
@@ -33,7 +34,17 @@ const SignUp = () => {
       const response = await res.json();
       console.log(response);
       if (response.message) {
+        swal("Now You can SignIn", {
+          buttons: false,
+          timer: 2000,
+        });
         history.push("/signin");
+      } else {
+        swal(response.error, {
+          icon: "error",
+          buttons: false,
+          timer: 2000,
+        });
       }
     } catch (err) {
       console.log(err);

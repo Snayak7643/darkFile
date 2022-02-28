@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../App";
 import { Link, useHistory } from "react-router-dom";
+import swal from "sweetalert";
 import {
   CardWrapper,
   CardHeader,
@@ -36,7 +37,18 @@ const SignIn = () => {
         localStorage.setItem("jwt", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
         dispatch({ type: "USER", payload: data.user });
+        swal("Signed in successfully " + data.user.name, {
+          icon: "success",
+          buttons: false,
+          timer: 2000,
+        });
         history.push("/");
+      } else {
+        swal(data.error, {
+          icon: "error",
+          buttons: false,
+          timer: 2000,
+        });
       }
     } catch (err) {
       console.log(err);

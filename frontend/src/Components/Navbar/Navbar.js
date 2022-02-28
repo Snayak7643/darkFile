@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Nav, NavLink, NavIcon, NavMenu } from "./NavbarStyle";
-import { FaBars, FaTimes, FaShopify } from "react-icons/fa";
+import { FaBars, FaTimes, FaSpider } from "react-icons/fa";
 import { AppContext } from "../../App";
+import swal from "sweetalert";
 
 const Navbar = () => {
   const [active, setActive] = useState(0);
@@ -51,6 +52,11 @@ const Navbar = () => {
           onClick={() => {
             localStorage.clear();
             dispatch({ type: "CLEAR" });
+            swal("Logged Out Successfully", {
+              icon: "success",
+              buttons: false,
+              timer: 1000,
+            });
             history.push("/signin");
             handleClick();
           }}
@@ -64,7 +70,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavLink to="/" onClick={handleClick}>
-        <FaShopify style={{ fontSize: "3rem", marginLeft: "10px" }} />
+        <FaSpider style={{ fontSize: "3rem", marginLeft: "10px" }} />
       </NavLink>
       <NavIcon onClick={handleClick}>
         {active ? <FaTimes /> : <FaBars />}
