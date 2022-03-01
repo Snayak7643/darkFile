@@ -50,15 +50,15 @@ const CreatePost = () => {
           swal(response.error, {
             icon: "error",
             buttons: false,
-            timer: 2000,
+            timer: 1000,
           });
         } else {
           swal("Posted Successfully", {
             icon: "success",
             buttons: false,
-            timer: 2000,
+            timer: 1000,
           });
-          history.push("/");
+          history.push("/allposts");
         }
       } catch (err) {
         console.log(err);

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Nav, NavLink, NavIcon, NavMenu } from "./NavbarStyle";
-import { FaBars, FaTimes, FaSpider } from "react-icons/fa";
+import { FaBars, FaTimes, FaBattleNet } from "react-icons/fa";
 import { AppContext } from "../../App";
 import swal from "sweetalert";
 
@@ -17,9 +17,6 @@ const Navbar = () => {
   const Navigation = () => {
     if (!state) {
       return [
-        <NavLink key="about" to="/about" activeStyle onClick={handleClick}>
-          About
-        </NavLink>,
         <NavLink key="signin" to="/signin" activeStyle onClick={handleClick}>
           Sign In
         </NavLink>,
@@ -29,6 +26,9 @@ const Navbar = () => {
       ];
     } else {
       return [
+        <NavLink key="profile" to="/profile" activeStyle onClick={handleClick}>
+          Profile
+        </NavLink>,
         <NavLink
           key="allposts"
           to="/allposts"
@@ -70,7 +70,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavLink to="/" onClick={handleClick}>
-        <FaSpider style={{ fontSize: "3rem", marginLeft: "10px" }} />
+        <FaBattleNet style={{ fontSize: "3rem", marginLeft: "10px" }} />
       </NavLink>
       <NavIcon onClick={handleClick}>
         {active ? <FaTimes /> : <FaBars />}

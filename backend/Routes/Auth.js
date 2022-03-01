@@ -88,4 +88,10 @@ router.get("/allposts", RequiredSignIn, (req, res) => {
   func();
 });
 
+//profile route
+router.get("/profile", RequiredSignIn, (req, res) => {
+  const { name, email, _id } = req.user;
+  res.json({ _id, name, email });
+});
+
 module.exports = router;

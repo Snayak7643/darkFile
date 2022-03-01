@@ -6,6 +6,7 @@ import SignIn from "./Pages/SignIn/SignIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import CreatePost from "./Pages/CreatePost/CreatePost";
 import AllPosts from "./Pages/AllPosts/AllPosts";
+import Profile from "./Pages/Profile/Profile";
 import { initialState, reducer } from "./Reducers/reducer";
 
 export const AppContext = createContext();
@@ -34,6 +35,9 @@ const Routing = () => {
       </Route>
       <Route path="/createpost">
         <CreatePost />
+      </Route>
+      <Route path="/profile">
+        <Profile />
       </Route>
       <Route path="/allposts">
         <AllPosts />
