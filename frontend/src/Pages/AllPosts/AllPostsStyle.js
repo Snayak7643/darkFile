@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaTimes } from "react-icons/fa";
 
 export const CardWrapper = styled.div`
   display: grid;
@@ -41,4 +42,8 @@ export const CardImage = styled.img`
 export const CardContainer = styled.div`
   padding: 2px 16px;
   text-align: center;
+`;
+
+export const CutIcon = styled(FaTimes)`
+  float: right;
 `;

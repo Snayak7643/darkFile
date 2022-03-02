@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const { JWT_SECRET } = require("../keys");
 const jwt = require("jsonwebtoken");
 const RequiredSignIn = require("../Middlewares/RequiredSignIn");
+const { route } = require("express/lib/application");
+const res = require("express/lib/response");
 
 //Router for SignIn
 router.post("/signin", (req, res) => {
@@ -101,16 +103,35 @@ router.post("/updateprofile", RequiredSignIn, (req, res) => {
   if (!name || !password) {
     return res.json({ error: "Please Fill all the Details!!" });
   }
-  User.findOneAndUpdate({ _id }, { $set: { name, password } }).exec(function (
-    err,
-    user
-  ) {
-    if (err) {
-      res.status(500).json({ error: err });
-    } else {
-      res.json({ message: "Profile Updated", user });
-    }
-  });
+  bcrypt
+    .hash(password, 10)
+    .then((hashedPassword) => {
+      User.findOneAndUpdate(
+        { _id },
+        { $set: { name, password: hashedPassword } }
+      ).exec(function (err, user) {
+        if (err) {
+          res.status(500).json({ error: err });
+        } else {
+          res.json({ message: "Profile Updated", user });
+        }
+      });
+    })
+    .catch((err) => {
+      res.json({ error: err });
+    });
+});
+
+//delete post route
+router.post("/deletepost", RequiredSignIn, (req, res) => {
+  const { _id } = req.body;
+  Post.findByIdAndDelete({ _id })
+    .then(function (post) {
+      res.json({ message: "post deleted" });
+    })
+    .catch((err) => {
+      res.json({ error: err });
+    });
 });
 
 module.exports = router;

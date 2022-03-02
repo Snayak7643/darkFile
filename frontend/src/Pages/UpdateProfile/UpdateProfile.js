@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import {
   CardWrapper,
@@ -9,7 +9,6 @@ import {
   CardFieldset,
   CardInput,
   CardButton,
-  CardLink,
 } from "./UpdateProfileStyle";
 
 const UpdateProfile = () => {
