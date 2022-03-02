@@ -17,38 +17,27 @@ const Navbar = () => {
   const Navigation = () => {
     if (!state) {
       return [
-        <NavLink key="signin" to="/signin" activeStyle onClick={handleClick}>
+        <NavLink key="signin" to="/signin" onClick={handleClick}>
           Sign In
         </NavLink>,
-        <NavLink key="signup" to="/signup" activeStyle onClick={handleClick}>
+        <NavLink key="signup" to="/signup" onClick={handleClick}>
           Sign Up
         </NavLink>,
       ];
     } else {
       return [
-        <NavLink key="profile" to="/profile" activeStyle onClick={handleClick}>
+        <NavLink key="profile" to="/profile" onClick={handleClick}>
           Profile
         </NavLink>,
-        <NavLink
-          key="allposts"
-          to="/allposts"
-          activeStyle
-          onClick={handleClick}
-        >
+        <NavLink key="allposts" to="/allposts" onClick={handleClick}>
           All Posts
         </NavLink>,
-        <NavLink
-          key="createpost"
-          to="/createpost"
-          activeStyle
-          onClick={handleClick}
-        >
+        <NavLink key="createpost" to="/createpost" onClick={handleClick}>
           Create Post
         </NavLink>,
         <NavLink
           key="logout"
           to="/signin"
-          activeStyle
           onClick={() => {
             localStorage.clear();
             dispatch({ type: "CLEAR" });
