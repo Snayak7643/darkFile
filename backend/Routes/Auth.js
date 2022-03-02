@@ -94,4 +94,23 @@ router.get("/profile", RequiredSignIn, (req, res) => {
   res.json({ _id, name, email });
 });
 
+//update profile route
+router.post("/updateprofile", RequiredSignIn, (req, res) => {
+  const { name, password } = req.body;
+  const _id = req.user._id;
+  if (!name || !password) {
+    return res.json({ error: "Please Fill all the Details!!" });
+  }
+  User.findOneAndUpdate({ _id }, { $set: { name, password } }).exec(function (
+    err,
+    user
+  ) {
+    if (err) {
+      res.status(500).json({ error: err });
+    } else {
+      res.json({ message: "Profile Updated", user });
+    }
+  });
+});
+
 module.exports = router;

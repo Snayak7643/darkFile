@@ -6,6 +6,7 @@ import SignIn from "./Pages/SignIn/SignIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import CreatePost from "./Pages/CreatePost/CreatePost";
 import AllPosts from "./Pages/AllPosts/AllPosts";
+import UpdateProfile from "./Pages/UpdateProfile/UpdateProfile";
 import Profile from "./Pages/Profile/Profile";
 import { initialState, reducer } from "./Reducers/reducer";
 
@@ -41,6 +42,9 @@ const Routing = () => {
       </Route>
       <Route path="/allposts">
         <AllPosts />
+      </Route>
+      <Route path="/updateprofile">
+        <UpdateProfile />
       </Route>
     </Switch>
   );

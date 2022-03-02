@@ -37,7 +37,7 @@ const Profile = () => {
           src="https://res.cloudinary.com/multiverse/image/upload/v1646081849/eiyfoxixergto73mjhyo.jpg"
           alt="Photo"
         />
-        <Link to="/allposts">
+        <Link to="/updateprofile" style={{ textDecoration: "none" }}>
           <Icon />
         </Link>
         <Name>{data.name}</Name>
